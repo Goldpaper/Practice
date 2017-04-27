@@ -3,105 +3,105 @@
 #define Max 501
 using namespace std;
 
-int people[Max][Max];	//°¢ µµ½ÃÀÇ ¿¬°á°ü°è¸¦ ³ªÅ¸³¿
+int people[Max][Max]; //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¸¦ ï¿½ï¿½Å¸ï¿½ï¿½
 int temp[Max][Max];
 int result[Max][Max];
 
 int Matrix(int arr[Max][Max], int p, int q, int m)
 {
-	int temp = 0;
-	for (int i = 1; i <= m; i++)
-		temp += arr[p][i] * people[i][q];
-	return temp;
+    int temp = 0;
+    for (int i = 1; i <= m; i++)
+	temp += arr[p][i] * people[i][q];
+    return temp;
 }
 
 int main()
 {
-	std::ios::sync_with_stdio(false);	int test_case;	//Å×½ºÆ®ÄÉÀÌ½º ¹ÞÀ» º¯¼ö
-	int N, M;		//°¢°¢ µµ½ÃÀÇ ¼ö, µµ·ÎÀÇ ¼ö
-	int s, e;		//µµ·ÎÀÇ ½ÃÀÛ(start)°ú ³¡(end)À» ³ªÅ¸³¿
-	cin >> test_case;	//Å×½ºÆ® ÄÉÀÌ½º ¼ö ÀÔ·Â¹ÞÀ½
-	while (test_case--)
+    std::ios::sync_with_stdio(false);
+    int test_case;    //ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    int N, M;	 //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    int s, e;	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(start)ï¿½ï¿½ ï¿½ï¿½(end)ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
+    cin >> test_case; //ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½
+    while (test_case--)
+    {
+	for (int i = 0; i < Max; i++)
 	{
-		for (int i = 0; i < Max; i++)
-		{
-			for (int j = 0; j < Max; j++)
-			{
-				people[i][j] = 0;
-				temp[i][j] = 0;
-				result[i][j] = 0;
-			}
-		}
-		cin >> N >> M;	//µµ½ÃÀÇ ¼ö, µµ·ÎÀÇ ¼ö ÀÔ·Â¹ÞÀ½
-		for (int i = 1; i <= N; i++)	//ÀÎ±¸¼ö¸¦ ÀÔ·Â¹ÞÀ½
-			cin >> people[i][0];		//µµ½ÃÀÇ ¿¬°á°ü°è¿¡¼­ »ç¿ëÇÏÁö ¾Ê´Â 0¿­À» È°¿ëÇÏ¿© ÀÎ±¸¼ö ÀúÀå
-
-		for (int i = 1; i <= M; i++)
-		{
-			cin >> s >> e;
-			people[s][e] = 1;
-			people[e][s] = 1;
-			temp[s][e] = 1;
-			temp[e][s] = 1;
-			result[s][e] = 1;
-			result[e][s] = 1;
-		}
-
-		int count = 2;
-		int N_temp = N;
-		while (N_temp--)
-		{
-			for (int i = 1; i <= N; i++)
-			{
-				for (int j = 1; j <= N; j++)
-				{
-					if (i == j)
-						continue;
-					if (!temp[i][j])
-					{
-						result[i][j] = Matrix(temp, i, j, N);
-						if (!result[i][j])
-							result[i][j] = count;
-					}
-				}
-			}
-			for (int i = 1; i <= N; i++)
-				for (int j = 1; j <= N; j++)
-					temp[i][j] = result[i][j];
-			count++;
-		}
-	
-
-		int xi[Max];
-		for (int i = 1; i <= N; i++)
-		{
-			int len = 0;	//°Å¸®¹Ý°æ
-			int len_sum = 0;	//°Å¸®ÇÕ
-			for (int j = 1; j <= N; j++)
-			{
-				if (i == j)
-					continue;
-				if (len < temp[i][j])
-					len = temp[i][j];
-				len_sum += temp[i][j];
-			}
-
-			xi[i] = (N - 1)*len + len_sum;
-		}
-
-		int min = xi[1];
-		int sudo = 1;
-		for (int i = 2; i <= N; i++)
-		{
-			if (min > xi[i])
-			{
-				min = xi[i];
-				sudo = i;
-			}
-			else if (min == xi[i])
-				people[sudo][0] > people[i][0] ? sudo = sudo : sudo = i;
-		}
-		cout << sudo << endl;
+	    for (int j = 0; j < Max; j++)
+	    {
+		people[i][j] = 0;
+		temp[i][j] = 0;
+		result[i][j] = 0;
+	    }
 	}
-	return 0;
+	cin >> N >> M;		     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½
+	for (int i = 1; i <= N; i++) //ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½
+	    cin >> people[i][0];     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ 0ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+	for (int i = 1; i <= M; i++)
+	{
+	    cin >> s >> e;
+	    people[s][e] = 1;
+	    people[e][s] = 1;
+	    temp[s][e] = 1;
+	    temp[e][s] = 1;
+	    result[s][e] = 1;
+	    result[e][s] = 1;
+	}
+
+	int count = 2;
+	int N_temp = N;
+	while (N_temp--)
+	{
+	    for (int i = 1; i <= N; i++)
+	    {
+		for (int j = 1; j <= N; j++)
+		{
+		    if (i == j)
+			continue;
+		    if (!temp[i][j])
+		    {
+			result[i][j] = Matrix(temp, i, j, N);
+			if (!result[i][j])
+			    result[i][j] = count;
+		    }
+		}
+	    }
+	    for (int i = 1; i <= N; i++)
+		for (int j = 1; j <= N; j++)
+		    temp[i][j] = result[i][j];
+	    count++;
+	}
+
+	int xi[Max];
+	for (int i = 1; i <= N; i++)
+	{
+	    int len = 0;     //ï¿½Å¸ï¿½ï¿½Ý°ï¿½
+	    int len_sum = 0; //ï¿½Å¸ï¿½ï¿½ï¿½
+	    for (int j = 1; j <= N; j++)
+	    {
+		if (i == j)
+		    continue;
+		if (len < temp[i][j])
+		    len = temp[i][j];
+		len_sum += temp[i][j];
+	    }
+
+	    xi[i] = (N - 1) * len + len_sum;
+	}
+
+	int min = xi[1];
+	int sudo = 1;
+	for (int i = 2; i <= N; i++)
+	{
+	    if (min > xi[i])
+	    {
+		min = xi[i];
+		sudo = i;
+	    }
+	    else if (min == xi[i])
+		people[sudo][0] > people[i][0] ? sudo = sudo : sudo = i;
+	}
+	cout << sudo << endl;
+    }
+    return 0;
 }
