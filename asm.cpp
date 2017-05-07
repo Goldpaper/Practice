@@ -9,10 +9,9 @@ int main()
 			byte2 BYTE 14h
 			word1 WORD 3
 			word2 SWORD 9000h
-			dword1 DWORD 12345678h //(¼ýÀÚ±â¾ï¾È³²)
-			dword2 DWORD 1, 2, 3, 4, 5//(¼ýÀÚ±â¾ï¾È³²)
+			dword1 DWORD 12345678h //(ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È³ï¿½)
+			dword2 DWORD 1, 2, 3, 4, 5//(ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½È³ï¿½)
 			
 			mov ax, word1
-
 	}
 }
